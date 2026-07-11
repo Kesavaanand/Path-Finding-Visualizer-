@@ -3,8 +3,8 @@
 #include <sstream>
 #include <vector>
 #include <utility>
-#include "algorithms/grid.h"
-#include "algorithms/search_result.h"
+#include "grid.h"
+#include "search_result.h"
 
 // A tiny hand-rolled JSON writer. We avoid pulling in a full JSON
 // library since our response shapes are simple and fixed -- this
@@ -51,9 +51,6 @@ inline std::string resultToJson(const SearchResult& res) {
     return os.str();
 }
 
-// Extremely small helper to pull an int value out of a flat JSON
-// object like {"rows":25,"cols":40,"algorithm":"astar"} without a
-// full parser. Good enough for our fixed, simple request bodies.
 inline int extractInt(const std::string& body, const std::string& key, int def) {
     std::string pattern = "\"" + key + "\":";
     auto pos = body.find(pattern);
