@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pathfind — Graph Algorithms Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">◱</span>
+      <div class="brand-text">
+        <h1>Pathfind</h1>
+        <span class="brand-sub">graph algorithms lab</span>
+      </div>
+    </div>
+
+    <div class="algo-select" role="tablist" aria-label="Algorithm selector">
+      <button class="algo-btn active" data-algo="bfs" role="tab" aria-selected="true">
+        <span class="algo-code">01</span> BFS
+      </button>
+      <button class="algo-btn" data-algo="dfs" role="tab" aria-selected="false">
+        <span class="algo-code">02</span> DFS
+      </button>
+      <button class="algo-btn" data-algo="dijkstra" role="tab" aria-selected="false">
+        <span class="algo-code">03</span> Dijkstra
+      </button>
+      <button class="algo-btn" data-algo="astar" role="tab" aria-selected="false">
+        <span class="algo-code">04</span> A*
+      </button>
+    </div>
+  </header>
+
+  <main class="layout">
+
+    <section class="grid-panel">
+      <div class="grid-toolbar">
+        <div class="tool-group" role="radiogroup" aria-label="Draw mode">
+          <button class="tool-btn active" data-mode="wall" title="Draw walls">
+            <span class="swatch swatch-wall"></span> Wall
+          </button>
+          <button class="tool-btn" data-mode="mud" title="Draw weighted terrain">
+            <span class="swatch swatch-mud"></span> Terrain
+          </button>
+          <button class="tool-btn" data-mode="erase" title="Erase to open">
+            <span class="swatch swatch-open"></span> Erase
+          </button>
+          <button class="tool-btn" data-mode="start" title="Move start">
+            <span class="swatch swatch-start"></span> Start
+          </button>
+          <button class="tool-btn" data-mode="end" title="Move end">
+            <span class="swatch swatch-end"></span> End
+          </button>
+        </div>
+
+        <div class="tool-group">
+          <button id="generateMaze" class="action-btn">Generate Maze</button>
+          <button id="clearGrid" class="action-btn ghost">Clear</button>
+          <button id="runAlgo" class="action-btn primary">Run ▸</button>
+        </div>
+      </div>
+
+      <div id="gridContainer" class="grid-container" aria-label="Pathfinding grid">
+        <div class="grid-loading" id="gridLoading">initializing grid…</div>
+      </div>
+
+      <div class="speed-row">
+        <label for="speed">Animation speed</label>
+        <input type="range" id="speed" min="1" max="100" value="60">
+        <span id="speedLabel">Fast</span>
+      </div>
+    </section>
+
+    <aside class="side-panel">
+
+      <div class="card">
+        <h2>Run stats</h2>
+        <dl class="stat-list">
+          <div class="stat-row">
+            <dt>Cells visited</dt>
+            <dd id="statVisited">—</dd>
+          </div>
+          <div class="stat-row">
+            <dt>Path length</dt>
+            <dd id="statPath">—</dd>
+          </div>
+          <div class="stat-row">
+            <dt>Path cost</dt>
+            <dd id="statCost">—</dd>
+          </div>
+          <div class="stat-row">
+            <dt>Server time</dt>
+            <dd id="statTime">—</dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="card">
+        <h2>Algorithm notes</h2>
+        <div id="algoNotes" class="algo-notes">
+          <p class="algo-complexity">Time: <code>O(V + E)</code> · Space: <code>O(V)</code></p>
+          <p>Explores the grid ring by ring using a FIFO queue. Every cell costs the
+             same to enter, so BFS guarantees the fewest <em>steps</em> — but it will
+             walk straight through expensive terrain without noticing.</p>
+        </div>
+      </div>
+
+      <div class="card legend-card">
+        <h2>Legend</h2>
+        <ul class="legend-list">
+          <li><span class="swatch swatch-start"></span> Start</li>
+          <li><span class="swatch swatch-end"></span> End</li>
+          <li><span class="swatch swatch-wall"></span> Wall</li>
+          <li><span class="swatch swatch-mud"></span> Weighted terrain</li>
+          <li><span class="swatch swatch-visited"></span> Visited</li>
+          <li><span class="swatch swatch-path"></span> Shortest path</li>
+        </ul>
+      </div>
+
+    </aside>
+
+  </main>
+
+  <footer class="statusbar">
+    <span id="connStatus" class="conn-dot"></span>
+    <span id="connText">connecting to backend…</span>
+    <span class="statusbar-sep">·</span>
+    <span>C++ backend · BFS / DFS / Dijkstra / A* / DSU maze generation</span>
+  </footer>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
