@@ -2,7 +2,7 @@
 // Pathfinding Visualizer -- Backend Server
 // ==============================================================
 // All DSA logic (BFS, DFS, Dijkstra, A*, DSU-based maze generation)
-// lives in algorithms/*.h. This file is intentionally "dumb": it
+// lives alongside this file. This file is intentionally "dumb": it
 // just holds the current grid in memory, exposes it over a small
 // REST API, and serves the frontend's static files.
 //
@@ -17,13 +17,13 @@
 
 #include "httplib.h"
 #include "json_utils.h"
-#include "algorithms/grid.h"
-#include "algorithms/dsu.h"
-#include "algorithms/maze_generator.h"
-#include "algorithms/bfs.h"
-#include "algorithms/dfs.h"
-#include "algorithms/dijkstra.h"
-#include "algorithms/astar.h"
+#include "grid.h"
+#include "dsu.h"
+#include "maze_generator.h"
+#include "bfs.h"
+#include "dfs.h"
+#include "dijkstra.h"
+#include "astar.h"
 
 #include <memory>
 #include <mutex>
